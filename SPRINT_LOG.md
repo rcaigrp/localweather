@@ -55,3 +55,7 @@ Rewriting expense_tracker.py and acceptance_tests.py to ensure correct mocking a
 ## Turn 15 — Manager (2026-05-21 17:33 UTC)
 
 Running the full acceptance test suite with extended tracebacks to pinpoint exact failures in expense_tracker or acceptance_tests. Will analyze /tmp/pytest_full.log in the next turn to apply minimal fixes or mark complete.
+
+## Turn 16 — Manager (2026-05-21 17:35 UTC)
+
+Re-running acceptance tests with output captured to /tmp/pytest_full.log, then reading the log to verify test results and determine project completion.
