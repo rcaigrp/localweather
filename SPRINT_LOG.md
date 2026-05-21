@@ -35,3 +35,7 @@ Final verification sprint: created expense_tracker.py and acceptance_tests.py, r
 ## Turn 10 — Craft (2026-05-21 17:11 UTC)
 
 Rewrote expense_tracker.py and acceptance_tests.py to fix mocking and import issues. Used builtins.open mocking and ensured functions match criteria.
+
+## Turn 11 — Craft (2026-05-21 17:15 UTC)
+
+Created expense_tracker.py with core functions (add_expense, get_expenses, get_summary) that align with the acceptance tests. The module uses json and os as mocked in the tests. Reran acceptance tests to verify.
