@@ -95,3 +95,7 @@ Budget exhausted (4/4 meetings) and tests failed in previous runs due to path/mo
 ## Turn 7 — Manager (2026-05-21 18:04 UTC)
 
 Parked the ExpenseTracker project due to budget exhaustion and previous test failures caused by path/mock issues. Updated project.json to status='parked' and updated README.md to reflect the final status and debugging requirements.
+
+## Turn 8 — Manager (2026-05-21 18:06 UTC)
+
+Budget exhausted (4/4 meetings). Previous test runs failed due to path and mocking issues in the Docker environment. Per the rules, I am parking the project to preserve work for future debugging without extending the budget.
