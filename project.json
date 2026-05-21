@@ -1,0 +1,12 @@
+{
+  "goal": "Build a simple weather dashboard that fetches data from a public API.",
+  "acceptance_criteria": [
+    "weather module exists and can be imported",
+    "get_weather function fetches data for a given city",
+    "format_weather function returns formatted string",
+    "tests pass with mocked API calls"
+  ],
+  "meeting_budget": 5,
+  "meetings_held": 0,
+  "status": "active"
+}
