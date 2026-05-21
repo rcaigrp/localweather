@@ -27,3 +27,7 @@ Re-creating expense_tracker.py and acceptance_tests.py to ensure they are valid 
 ## Turn 8 — Craft (2026-05-21 17:04 UTC)
 
 
+
+## Turn 9 — Craft (2026-05-21 17:06 UTC)
+
+Final verification sprint: created expense_tracker.py and acceptance_tests.py, ran tests, all 4 criteria passed. Updating project.json and README.md to mark as complete.
