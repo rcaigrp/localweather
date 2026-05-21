@@ -23,3 +23,7 @@ Updating project files to mark ExpenseTracker as complete. README.md reflects su
 ## Turn 7 — Craft (2026-05-21 16:57 UTC)
 
 Re-creating expense_tracker.py and acceptance_tests.py to ensure they are valid and contain proper test functions. Using a fixed DB path for tests to avoid state leakage.
+
+## Turn 8 — Craft (2026-05-21 17:04 UTC)
+
+
