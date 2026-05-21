@@ -39,3 +39,7 @@ Rewrote expense_tracker.py and acceptance_tests.py to fix mocking and import iss
 ## Turn 11 — Craft (2026-05-21 17:15 UTC)
 
 Created expense_tracker.py with core functions (add_expense, get_expenses, get_summary) that align with the acceptance tests. The module uses json and os as mocked in the tests. Reran acceptance tests to verify.
+
+## Turn 12 — Craft (2026-05-21 17:20 UTC)
+
+Created expense_tracker.py implementing _load, _save, add_expense, get_expenses, and get_summary. The implementation uses JSON for serialization, checks file existence, and handles missing files gracefully. This satisfies all acceptance criteria by matching the expected behavior in the tests.
