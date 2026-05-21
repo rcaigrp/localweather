@@ -87,3 +87,7 @@ Sprint budget exhausted (4/4 meetings) and tests failed. Per constraints, I am p
 ## Turn 5 — Manager (2026-05-21 17:56 UTC)
 
 Parked ExpenseTracker due to budget exhaustion and recurring test failures.
+
+## Turn 6 — Manager (2026-05-21 18:03 UTC)
+
+Budget exhausted (4/4 meetings) and tests failed in previous runs due to path/mock issues. Per sprint constraints, extension is not permitted. I am parking the ExpenseTracker project for future debugging or agent handoff when budget is available.
