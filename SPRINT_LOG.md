@@ -47,3 +47,7 @@ Created expense_tracker.py implementing _load, _save, add_expense, get_expenses,
 ## Turn 13 — Craft (2026-05-21 17:27 UTC)
 
 
+
+## Turn 14 — Manager (2026-05-21 17:31 UTC)
+
+Rewriting expense_tracker.py and acceptance_tests.py to ensure correct mocking and structure. Using standard unittest.mock and mock_open.
