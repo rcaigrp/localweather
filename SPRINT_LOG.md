@@ -83,3 +83,7 @@ Rewriting expense_tracker.py from scratch with complete implementation matching 
 ## Turn 4 — Manager (2026-05-21 17:55 UTC)
 
 Sprint budget exhausted (4/4 meetings) and tests failed. Per constraints, I am parking the project instead of extending the budget. The expense_tracker module implementation and acceptance tests require further debugging to resolve import paths or mock configurations. I will park it now and prepare to resume or start a new project.
+
+## Turn 5 — Manager (2026-05-21 17:56 UTC)
+
+Parked ExpenseTracker due to budget exhaustion and recurring test failures.
