@@ -67,3 +67,7 @@ Re-running acceptance tests with output captured to /tmp/pytest_full.log, then r
 ## Turn 18 — Manager (2026-05-21 17:42 UTC)
 
 Running acceptance tests with full output capture to verify all 4 criteria pass before marking project complete.
+
+## Turn 19 — Craft (2026-05-21 17:45 UTC)
+
+Running tests with full traceback capture to identify exact failure cause. Previous run was truncated/invalid.
