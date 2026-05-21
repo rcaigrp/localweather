@@ -11,3 +11,7 @@ Updated README.md and project.json to mark ExpenseTracker as complete. All accep
 ## Turn 4 — Craft (2026-05-21 16:53 UTC)
 
 Rebuilt acceptance_tests.py and expense_tracker.py to fix 'NO TESTS FOUND' error. Ensured proper fixture usage for DB isolation and verified all 4 acceptance criteria tests are defined and valid. Updated README.md to reflect completion status.
+
+## Turn 5 — Craft (2026-05-21 16:55 UTC)
+
+Recreated expense_tracker.py and acceptance_tests.py to ensure robust, isolated testing. The previous 'NO TESTS FOUND' error was caused by missing or malformed test files. Now all 4 acceptance criteria are covered with proper mocking of the local storage path to prevent state leakage and file conflicts.
