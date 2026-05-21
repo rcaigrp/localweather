@@ -63,3 +63,7 @@ Re-running acceptance tests with output captured to /tmp/pytest_full.log, then r
 ## Turn 17 — Manager (2026-05-21 17:41 UTC)
 
 
+
+## Turn 18 — Manager (2026-05-21 17:42 UTC)
+
+Running acceptance tests with full output capture to verify all 4 criteria pass before marking project complete.
