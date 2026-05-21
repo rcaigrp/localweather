@@ -19,3 +19,7 @@ Recreated expense_tracker.py and acceptance_tests.py to ensure robust, isolated 
 ## Turn 6 — Manager (2026-05-21 16:56 UTC)
 
 Updating project files to mark ExpenseTracker as complete. README.md reflects successful test execution and final status. project.json updated to status='complete'.
+
+## Turn 7 — Craft (2026-05-21 16:57 UTC)
+
+Re-creating expense_tracker.py and acceptance_tests.py to ensure they are valid and contain proper test functions. Using a fixed DB path for tests to avoid state leakage.
