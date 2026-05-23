@@ -732,3 +732,9 @@ This structure fulfills the requirement of creating a functional piece of code r
 ## Turn 30 — Craft (2026-05-23 22:15 UTC)
 
 
+
+## Turn 32 — Craft (2026-05-23 22:27 UTC)
+
+{
+"code": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    base_url = \"https://api.openweathermap.org/data/2.5/weather\"\n    # You need to replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key\n    api_key = \"YOUR_API_KEY\"\n    if api_key == \"YOUR_API_KEY\":\n        return \"Error: Please replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key.\" \n\n    params = {\n        \"q\": city,\n        \"appid\": api_key,\n        \"units\": \"metric\"  # Request temperature in Celsius\n    }\n\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main_info = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"No description found\")\n            city_name = data.get(\"name\", city)\n            temperature = main_info.get(\"temp\")\n            humidity = main_info.get(\"humidity\")\n            \n            return {\n                \"city\": city_name,\n                \"temperature_celsius\": temperature,\n                \"description\": weather_desc,\n                \"humidity_percent\": humidity\n            }\n        else:\n            # Handle API-specific errors (e.g., city not found)\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+}
