@@ -577,3 +577,11 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 10 — Craft (2026-05-23 21:15 UTC)
 
 
+
+## Turn 11 — Craft (2026-05-23 21:18 UTC)
+
+{
+  "files": {
+    "app.py": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": \"YOUR_API_KEY\",  # IMPORTANT: Replace with your actual API key\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather = data.get(\"weather")[0]\n            return {\n                \"city\": data.get(\"name\", city),\n                \"temperature\": main.get(\"temp\", \"N/A\"),\n                \"description\": weather.get(\"description\", \"N/A\")\n            }\n        else:\n            return {\"error\": data.get(\"message\", \"City not found or API error\")}\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or API request error: {e}\"}"
+  }
+}
