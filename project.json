@@ -7,6 +7,6 @@
     "tests pass with mocked API calls"
   ],
   "meeting_budget": 5,
-  "meetings_held": 1,
+  "meetings_held": 2,
   "status": "active"
 }
