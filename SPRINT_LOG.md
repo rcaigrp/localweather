@@ -344,3 +344,14 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 8 — Craft (2026-05-23 19:14 UTC)
 
 
+
+## Turn 9 — Craft (2026-05-23 19:17 UTC)
+
+{
+  "files": [
+    {
+      "path": "app.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city.\"\"\"\n    base_url = \"http://api.openweathermap.com/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": \"YOUR_API_KEY\",\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"N/A\")\n            return f\"Weather in {city}: Temperature is {main.get(\"temp\", \"N/A\")}°C, Description: {weather_desc}\"\n        else:\n            return f\"Error: Could not find weather data for {city}. Response: {data.get(\"message\", \"No message provided\")}\"\n    except requests.exceptions.RequestException as e:\n        return f\"Error fetching weather data for {city}: {e}\"\n\nif __name__ == \"__main__\":\n    city_name = input(\"Enter city name: \")\n    if city_name:\n        result = get_weather(city_name)\n        print(result)\n    else:\n        print(\"Please enter a city name.\")"
+    }
+  ]
+}
