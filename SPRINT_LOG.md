@@ -355,3 +355,9 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
     }
   ]
 }
+
+## Turn 10 — Craft (2026-05-23 19:20 UTC)
+
+{
+"code": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    API_KEY = \"YOUR_API_KEY\"  # !!! IMPORTANT: Replace with your actual API key\n    BASE_URL = \"http://api.openweathermap.org/data/2.5/weather\"\n    \n    params = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"\n    }\n    \n    try:\n        response = requests.get(BASE_URL, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather = data.get(\"weather")[0]\n            city_name = data.get(\"name\")\n            description = weather.get(\"description\", \"N/A\")\n            temperature = main.get(\"temp\", \"N/A\")\n            humidity = main.get(\"humidity\", \"N/A\")\n            \n            print(f\"Weather in {city_name}:\")\n            print(f\"  Temperature: {temperature}°C\")\n            print(f\"  Description: {description.capitalize()}\")\n            print(f\"  Humidity: {humidity}%\")\n        else:\n            print(f\"Error: Could not find weather data. Response code: {data.get(\"cod\")}, Message: {data.get(\"message\", \"No message provided\")}\")\n            \n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred during the API request: {e}\")\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n\nif __name__ == \"__main__\":\n    # Example usage\n    city_name = input(\"Enter the city name you want to check the weather for: \")\n    if city_name:\n        get_weather(city_name)\n    else:\n        print(\"City name cannot be empty.\")"
+}
