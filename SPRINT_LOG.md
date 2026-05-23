@@ -527,3 +527,13 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 3 — Craft (2026-05-23 20:54 UTC)
 
 
+
+## Turn 4 — Craft (2026-05-23 20:57 UTC)
+
+{
+"files": [
+{
+"path": "main.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    # Using a placeholder API. In a real application, you would use a service like OpenWeatherMap.\n    # NOTE: This example uses a dummy endpoint and will likely fail unless you replace it with a real API key and endpoint.\n    API_KEY = \"YOUR_API_KEY\"\n    BASE_URL = f\"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric\"\n\n    try:\n        response = requests.get(BASE_URL)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n\n        if data.get(\"cod\") == 200:\n            main_info = {\n                \"city\": data.get(\"name\", city),\n                \"temperature\": data.get(\"main\", \"N/A\"),\n                \"description\": data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\")\n            }\n            return main_info\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+}
+}
