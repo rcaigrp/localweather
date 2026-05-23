@@ -693,3 +693,14 @@ This structure fulfills the requirement of creating a functional piece of code r
 ## Turn 23 — Craft (2026-05-23 21:55 UTC)
 
 
+
+## Turn 24 — Craft (2026-05-23 21:58 UTC)
+
+{
+  "files": [
+    {
+      "path": "app.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": \"YOUR_API_KEY\",  # !!! IMPORTANT: Replace with a valid API key\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"N/A\")\n            temperature = main.get(\"temp\")\n            humidity = data.get(\"main\", {}).get(\"humidity\")\n            print(f\"Weather in {city}:\\n  Temperature: {temperature}°C\\n  Description: {weather_desc}\\n  Humidity: {humidity}%\")\n            return {\n                \"city\": city,\n                \"temp\": temperature,\n                \"description\": weather_desc,\n                \"humidity\": humidity\n            }\n        else:\n            print(f\"Error fetching weather data: {data.get('message', 'Unknown error')}\")\n            return None\n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred during the API request: {e}\")\n        return None\n\nif __name__ == \"__main__\":\n    # WARNING: You must set a valid OpenWeatherMap API key for this to work.\n    # The script will fail unless you replace \"YOUR_API_KEY\" with a real key.\n    city_name = input(\"Enter the city you want to check the weather for: \")\n    if city_name:\n        get_weather(city_name)\n    else:\n        print(\"No city entered.\")"
+    }
+  ]
+}
