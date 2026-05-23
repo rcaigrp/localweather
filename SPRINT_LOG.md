@@ -704,3 +704,11 @@ This structure fulfills the requirement of creating a functional piece of code r
     }
   ]
 }
+
+## Turn 25 — Craft (2026-05-23 22:01 UTC)
+
+{
+  "files": {
+    "weather_service.py": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    # You need to replace 'YOUR_API_KEY' with a real OpenWeatherMap API key\n    api_key = \"YOUR_API_KEY\"\n    if api_key == \"YOUR_API_KEY\":\n        return {\"error\": \"API Key not configured. Please set a valid API key.\"}\n\n    params = {\n        \"q\": city,\n        \"appid\": api_key,\n        \"units\": \"metric\"\n    }\n\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            weather_info = {\n                \"city\": data.get(\"name\", city),\n                \"temperature\": data.get(\"main\", \"N/A\"),\n                \"description\": data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\"),\n                \"humidity\": data.get(\"main\", \"N/A\")\n            }\n            return weather_info\n        else:\n            return {\"error\": f\"Could not find weather data. API response: {data.get(\"message\", \"No message provided\")}\"}\n\    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Error fetching weather data: {e}\"}"
+  }
+}
