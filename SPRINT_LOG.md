@@ -111,3 +111,14 @@ Rewriting the expense_tracker implementation to fix import and logic errors. The
 ## Turn 2 — Craft (2026-05-23 16:38 UTC)
 
 
+
+## Turn 3 — Craft (2026-05-23 16:41 UTC)
+
+{
+"files": [
+{
+"name": "weather_app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    API_KEY = \"YOUR_API_KEY\"  # Replace with your actual API key\n    BASE_URL = \"https://api.openweathermap.org/data/2.5/weather\"\n    \n    params = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"\n    }\n    \n    try:\n        response = requests.get(BASE_URL, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"N/A\")\n            temperature = main.get(\"temp\", \"N/A\")\n            humidity = data.get(\"main\", {}).get(\"humidity\", \"N/A\")\n            city_name = data.get(\"name\", \"N/A\")\n            \n            print(f\"Weather in {city_name}:\\n\" \n                  f\"  Temperature: {temperature}°C\\n\" \n                  f\"  Description: {weather_desc}\\n\" \n                  f\"  Humidity: {humidity}%\\n\")\n        else:\n            print(f\"Error: Could not retrieve weather data. Response code: {data.get(\"cod\")}\")\n            print(f\"Message: {data.get(\"message\", \"No message provided\")}\")\n    \n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred during the API request: {e}\")\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n\n\nif __name__ == \"__main__\":\n    # IMPORTANT: Replace \"YOUR_API_KEY\" with your actual OpenWeatherMap API key\n    if \"YOUR_API_KEY\" == \"YOUR_API_KEY\":\n        print(\"\\n*** ERROR: Please replace 'YOUR_API_KEY' in the script with a valid OpenWeatherMap API key to run this function. ***\\n\")\n    else:\n        city = input(\"Enter the city name to get the weather: \")\n        if city:\n            get_weather(city)\n        else:\n            print(\"City name cannot be empty.\")"
+}
+]
+}
