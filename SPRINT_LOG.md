@@ -369,3 +369,13 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 12 — Craft (2026-05-23 19:25 UTC)
 
 
+
+## Turn 13 — Craft (2026-05-23 19:28 UTC)
+
+{
+"files": [
+{
+"name": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        params = {\n            \"q\": city,\n            \"appid\": \"YOUR_API_KEY\",  # !!! REPLACE WITH YOUR ACTUAL API KEY !!!\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            description = data.get(\"description\")\n            weather_desc = f\"{description.capitalize()}: {main}°C\"\n            print(f\"Weather in {city}: {weather_desc}\")\n        else:\n            print(f\"Error: Could not find weather data for {city}. Response: {data.get('message', 'No message provided')}\")\n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred during the API request: {e}\")\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n\nif __name__ == \"__main__\":\n    # IMPORTANT: Replace 'YOUR_API_KEY' with a real OpenWeatherMap API key\n    # This script requires an API key to function.\n    print(\"--- Weather Checker ---\")\n    city_name = input(\"Enter city name: \")\n    if city_name:\n        get_weather(city_name)\n    else:\n        print(\"No city entered.\")"
+}
+}
