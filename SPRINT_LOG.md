@@ -224,3 +224,13 @@ Rewriting the expense_tracker implementation to fix import and logic errors. The
 ## Turn 23 — Craft (2026-05-23 17:45 UTC)
 
 
+
+## Turn 24 — Craft (2026-05-23 17:49 UTC)
+
+{
+"files": [
+{
+"path": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    API_KEY = \"YOUR_OPENWEATHERMAP_API_KEY\"  # IMPORTANT: Replace with your actual API key\n    BASE_URL = \"http://api.openweathermap.org/data/2.5/weather\"\n\n    if API_KEY == \"YOUR_OPENWEATHERMAP_API_KEY\":\n        return \"Error: Please set a valid OpenWeatherMap API key in the script.\"\n\n    params = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"  # Request temperature in Celsius\n    }\n\n    try:\n        response = requests.get(BASE_URL, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n\n        if data.get(\"cod\") == 200:\n            main_info = data.get(\"main\")\n            description = data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\")\n            city_name = data.get(\"name\", city)\n            temperature = main_info.get(\"temp\")\n            humidity = main_info.get(\"humidity\")\n\n            result = f\"Weather in {city_name}:\n\" \n            result += f\"Temperature: {temperature}°C\n\" \n            result += f\"Description: {description.capitalize()}\n\" \n            result += f\"Humidity: {humidity}%\n\"\n            return result\n        else:\n            return f\"Error: City not found or API error. Code: {data.get(\"cod\")}\"\n\n    except requests.exceptions.RequestException as e:\n        return f\"Error fetching data: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\"\n\n\nif __name__ == \"__main__\":\n    # Example usage\n    city_input = input(\"Enter city name: \")\n    if city_input:\n        weather_result = get_weather(city_input)\n        print(weather_result)\n    else:\n        print(\"No city name entered.\")"
+}
+}
