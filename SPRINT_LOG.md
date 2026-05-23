@@ -333,3 +333,10 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 6 — Craft (2026-05-23 19:08 UTC)
 
 
+
+## Turn 7 — Craft (2026-05-23 19:11 UTC)
+
+{
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    # NOTE: Replace 'YOUR_API_KEY' with a valid API key from a service like OpenWeatherMap\n    API_KEY = \"YOUR_API_KEY\"\n    BASE_URL = \"http://api.openweathermap.org/data/2.5/weather?q=\"\n    
+    if API_KEY == \"YOUR_API_KEY\":\n        return {\"error\": \"API Key not set. Please set a valid API key to use this function.\"}\n\n    complete_url = f\"{BASE_URL}{city}&appid={API_KEY}&units=metric\"\n    \n    try:\n        response = requests.get(complete_url)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            weather_info = {\n                \"city\": data.get(\"name\", city),\n                \"temperature\": data.get(\"main\", \"N/A\"),\n                \"description\": data.get(\"description\", \"N/A\"),\n                \"humidity\": data.get(\"humidity\", \"N/A\")\n            }\n            return weather_info\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n            \n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+}
