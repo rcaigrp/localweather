@@ -298,3 +298,13 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 1 — Manager (2026-05-23 18:53 UTC)
 
 
+
+## Turn 2 — Craft (2026-05-23 18:56 UTC)
+
+{
+"files": [
+{
+"path": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    API_KEY = \"YOUR_API_KEY\"  # Replace with your actual API key\n    BASE_URL = \"https://api.openweathermap.org/data/2.5/weather\"\n    PARAMS = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(BASE_URL, params=PARAMS)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"N/A\")\n            temperature = main.get(\"temp\")\n            humidity = data.get(\"main\", {}).get(\"humidity\")\n            print(f\"Weather in {city}:\\n  Temperature: {temperature}°C\\n  Description: {weather_desc}\\n  Humidity: {humidity}%\")\n        else:\n            print(f\"Error: Could not find weather data for {city}. Response code: {data.get(\"cod\")}\")\n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred while connecting to the weather service: {e}\")\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n\nif __name__ == \"__main__\":\n    # Example usage\n    city_name = input(\"Enter city name: \")\n    if city_name:\n        get_weather(city_name)\n    else:\n        print(\"No city entered.\")"
+}
+}
