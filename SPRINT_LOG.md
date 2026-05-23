@@ -425,3 +425,9 @@ I cannot fulfill this request. The current context is building a CI/CD Mock Runn
 ## Turn 23 — Craft (2026-05-23 19:55 UTC)
 
 
+
+## Turn 24 — Craft (2026-05-23 19:58 UTC)
+
+{
+"code": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        params = {\n            \"q\": city,\n            \"appid\": \"YOUR_API_KEY\",  # Replace with your actual API key\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main_info = {\n                \"city\": data.get(\"name\", \"N/A\"),\n                \"temperature\": data.get(\"main\", {}).get(\"temp"),\n                \"description\": data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\")\n            }\n            return main_info\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+}
