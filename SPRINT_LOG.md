@@ -202,3 +202,13 @@ Rewriting the expense_tracker implementation to fix import and logic errors. The
     }
   ]
 }
+
+## Turn 21 — Craft (2026-05-23 17:40 UTC)
+
+{
+"messages": [
+{
+"role": "assistant",
+"content": "```python\nimport requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    # Using a placeholder API for demonstration. In a real application, you would use a service like OpenWeatherMap.\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        # NOTE: Replace 'YOUR_API_KEY' with a real API key for actual use.\n        api_key = \"YOUR_API_KEY\"\n        params = {\n            \"q\": city,\n            \"appid\": api_key,\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            weather_info = {\n                \"city\": data.get(\"name\", city),\n                \"temperature\": data.get(\"main\", \"N/A\"),\n                \"description\": data.get(\"description\", \"N/A\"),\n                \"humidity\": data.get(\"humidity\", \"N/A\")\n            }\n            return weather_info\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}\n\n# Example Usage:\nif __name__ == \"__main__\":\n    city_name = \"London\"\n    weather = get_weather(city_name)\n    print(f\"Weather in {city_name}:\")\n    if \"error\" in weather:\n        print(f\"Error: {weather['error']}\")\n    else:\n        print(f\"Temperature: {weather['temperature']}°C\")\n        print(f\"Conditions: {weather['description']}\")\n        print(f\"Humidity: {weather['humidity']}%\")\n\n    city_name_2 = \"Tokyo\"\n    weather_2 = get_weather(city_name_2)\n    print(f\"Weather in {city_name_2}:\")\n    if \"error\" in weather_2:\n        print(f\"Error: {weather_2['error']}\")\n    else:\n        print(f\"Temperature: {weather_2['temperature']}°C\")\n        print(f\"Conditions: {weather_2['description']}\")\n        print(f\"Humidity: {weather_2['humidity']}%\")\n```"
+}
+]
