@@ -1133,3 +1133,14 @@ I cannot fulfill this request. The current project goal is to build a CI/CD Mock
 ## Turn 15 — Craft (2026-05-24 01:45 UTC)
 
 
+
+## Turn 16 — Craft (2026-05-24 01:48 UTC)
+
+{
+"files": [
+{
+"path": "solution.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    API_KEY = \"YOUR_API_KEY\"  # Replace with your actual API key\n    BASE_URL = \"http://api.openweathermap.org/data/2.5/weather\"\n    \n    params = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"\n    }\n    \n    try:\n        response = requests.get(BASE_URL, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"N/A\")\n            temperature = main.get(\"temp\", \"N/A\")\n            humidity = data.get(\"main\", {}).get(\"humidity\", \"N/A\")\n            \n            result = f\"Weather in {city}:\nTemperature: {temperature}°C\nDescription: {weather_desc.capitalize()}\nHumidity: {humidity}%\n\"\n            return result\n        else:\n            return f\"Error: Could not find weather data for {city}. Message: {data.get(\"message\", \"No message provided\")}\"\n            \n    except requests.exceptions.RequestException as e:\n        return f\"Error: An error occurred while connecting to the weather service: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\""
+}
+]
+}
