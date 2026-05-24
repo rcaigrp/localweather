@@ -2111,3 +2111,14 @@ if __name__ == \"__main__\":
 ## Turn 17 — Manager (2026-05-24 10:46 UTC)
 
 
+
+## Turn 18 — Craft (2026-05-24 10:50 UTC)
+
+{
+  "files": [
+    {
+      "path": "src/weather_service.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        params = {\n            \"q\": city,\n            \"appid\": \"YOUR_API_KEY\",  # IMPORTANT: Replace with your actual API key\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather = data.get(\"weather")[0]\n            city_name = data.get(\"name\")\n            description = weather.get(\"description\", \"N/A\")\n            temperature = main.get(\"temp\", \"N/A\")\n            humidity = main.get(\"humidity\", \"N/A\")\n            \n            return {\n                \"city\": city_name,\n                \"temperature\": f\"{temperature}°C\",\n                \"description\": description.capitalize(),\n                \"humidity\": f\"{humidity}%\"\n            }\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+    }
+  ]
+}
