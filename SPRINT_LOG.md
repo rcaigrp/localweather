@@ -1224,3 +1224,15 @@ I cannot fulfill this request. The current project goal is to build a CI/CD Mock
 ## Turn 34 — Craft (2026-05-24 02:41 UTC)
 
 
+
+## Turn 35 — Craft (2026-05-24 02:44 UTC)
+
+{
+  "files": [
+    {
+      "path": "app.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        params = {\n            \"q\": city,\n            \"appid\": \"YOUR_API_KEY\",  # Replace with your actual API key\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather = data.get(\"weather")[0]\n            description = weather.get(\"description\")\n            temperature = main.get(\"temp\")\n            humidity = main.get(\"humidity\")\n            city_name = data.get(\"name\")\n            \n            return f\"Weather in {city_name}:\\n\" \n                   f\"  Temperature: {temperature}°C\\n\" \n                   f\"  Description: {description.capitalize()}\\n\" \n                   f\"  Humidity: {humidity}%\"\n        else:\n            return f\"Error: Could not find weather data for {city}. Response code: {data.get('cod')}\"\n    except requests.exceptions.RequestException as e:\n        return f\"Error: Could not connect to the weather service or an HTTP error occurred: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\""
+    \nif __name__ == \"__main__\":\n    # IMPORTANT: Replace \"YOUR_API_KEY\" with a valid OpenWeatherMap API key\n    API_KEY = \"YOUR_API_KEY\"\n    if API_KEY == \"YOUR_API_KEY\":\n        print(\"Please replace 'YOUR_API_KEY' in app.py with a valid OpenWeatherMap API key to run this script.\")\n    else:\n        city = input(\"Enter the city name: \")\n        result = get_weather(city)\n        print(\"\\n--- Weather Result ---\")\n        print(result)\n"
+    }
+  ]
+}
