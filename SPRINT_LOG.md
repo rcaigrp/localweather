@@ -1649,3 +1649,15 @@ I understand the instruction. The goal is to implement the 'weather module' as t
 ## Turn 2 — Craft (2026-05-24 07:41 UTC)
 
 
+
+## Turn 3 — Craft (2026-05-24 07:43 UTC)
+
+{
+"files": [
+{
+"path": "src/weather.py",
+"content": "def get_weather(city: str) -> dict:\n    \"\"\"Fetches the weather data for a given city.\"\"\"\n    # In a real application, this would involve an API call to a weather service.\n    if city.lower() == \"london\":\n        return {\n            \"city\": \"London\",\n            \"temperature\": \"15°C\",\n            \"condition\": \"Cloudy\",\n            \"humidity\": \"75%\"\n        }\n    elif city.lower() == \"tokyo\":\n        return {\n            \"city\": \"Tokyo\",\n            \"temperature\": \"22°C\",\n            \"condition\": \"Sunny\",\n            \"humidity\": \"60%\"\n        }\n    else:\n        return {\n            \"city\": city.capitalize(),\n            \"temperature\": \"N/A\",\n            \"condition\": \"Not Found\",\n            \"humidity\": \"N/A\"\n        }\n\ndef display_weather(city: str):\n    \"\"\"Displays the formatted weather information.\"\"\"\n    weather_data = get_weather(city)\n    print(\"\\n--- Weather Report ---\")\n    print(f\"City: {weather_data.get('city')}\")\n    print(f\"Temperature: {weather_data.get('temperature')}\")\n    print(f\"Condition: {weather_data.get('condition')}\")\n    print(f\"Humidity: {weather_data.get('humidity')}\")
+"
+}
+]
+}
