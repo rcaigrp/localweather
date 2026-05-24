@@ -1110,3 +1110,14 @@ I cannot fulfill this request. The current project goal is to build a CI/CD Mock
 ## Turn 11 — Craft (2026-05-24 01:34 UTC)
 
 
+
+## Turn 12 — Craft (2026-05-24 01:37 UTC)
+
+{
+"files": [
+{
+"path": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        params = {\n            \"q\": city,\n            \"appid\": \"YOUR_API_KEY\",  # !!! REPLACE WITH YOUR ACTUAL API KEY\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main_info = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"N/A\")\n            temperature = main_info.get(\"temp\", \"N/A\")\n            humidity = main_info.get(\"humidity\", \"N/A\")\n            \n            print(f\"Weather in {city}:\")\n            print(f\"  Temperature: {temperature}°C\")\n            print(f\"  Description: {weather_desc.capitalize()}\")\n            print(f\"  Humidity: {humidity}%\")\n        else:\n            print(f\"Error: Could not find weather data for {city}. Response code: {data.get(\"cod\")}\")\n            print(f\"Message: {data.get(\"message\", \"No message provided\")}\")\n            \n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred during the API request: {e}\")\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n\nif __name__ == \"__main__\":\n    # IMPORTANT: You must replace \"YOUR_API_KEY\" with a valid OpenWeatherMap API key\n    API_KEY = \"YOUR_API_KEY\"\n    if API_KEY == \"YOUR_API_KEY\":\n        print(\"Please replace 'YOUR_API_KEY' in the script with a valid OpenWeatherMap API key to run this function.\")\n    else:\n        city_name = input(\"Enter the city name you want to check the weather for: \")\n        get_weather(city_name)\n"
+}
+]
+}
