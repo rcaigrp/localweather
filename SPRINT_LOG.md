@@ -1491,3 +1491,16 @@ The previous request did not contain any code or tests to execute. Please provid
 ## Turn 11 — Manager (2026-05-24 05:33 UTC)
 
 
+
+## Turn 12 — Craft (2026-05-24 05:37 UTC)
+
+{
+  "files": [
+    {
+      "path": "app.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    # Using a placeholder API for demonstration. In a real scenario, you would use a service like OpenWeatherMap.\n    base_url = f\"http://api.openweathermap.org/data/2.5/weather?q={city}&appid=YOUR_API_KEY&units=metric\"\n    \n    try:\n        response = requests.get(base_url)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            description = data.get(\"description\")\n            temperature = main.get(\"temp\")\n            humidity = data.get(\"main\", {}).get(\"humidity\")\n            \n            if temperature is not None and description is not None:\n                return f\"Weather in {city}: Temperature {temperature}°C, Description: {description}, Humidity: {humidity}%\n            else:\n                return f\"Error: Could not parse weather data for {city}. Details: {data.get('message', 'Unknown error')}\"\n        else:\n            return f\"Error: City '{city}' not found. Message: {data.get('message', 'City not found')}\"\n            \n    except requests.exceptions.RequestException as e:\n        return f\"Error: An error occurred while connecting to the weather service: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\""
+    \n\nif __name__ == \"__main__\":\n    # NOTE: Replace 'YOUR_API_KEY' with a real OpenWeatherMap API key to make this functional.\n    print(\"--- Weather Fetcher Demo ---\")\n    city_name = input(\"Enter the city you want to check: \")\n    if city_name:\n        weather_info = get_weather(city_name)\n        print(weather_info)\n    else:\n        print(\"Please enter a city name.\")"
+    
+    # To run this, you need to install the 'requests' library: pip install requests"
+  ]
+}
