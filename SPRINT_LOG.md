@@ -1991,3 +1991,54 @@ I understand the immediate task is to implement the 'weather module' to satisfy 
 ## Turn 3 — Craft (2026-05-24 10:11 UTC)
 
 
+
+## Turn 4 — Craft (2026-05-24 10:15 UTC)
+
+{
+  "content": "
+import requests
+
+def get_weather(city):
+    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"
+    base_url = \"https://api.openweathermap.org/data/2.5/weather?q=\"
+    complete_url = base_url + city + \".&appid=1234567890&units=metric\"  # NOTE: Replace with actual API key
+    
+    try:
+        response = requests.get(complete_url)
+        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+        data = response.json()
+        
+        if data.get(\"cod\") == 200:
+            main_info = data.get(\"main\", {\"temp\": \"N/A\", \"humidity\": \"N/A\"})
+            weather_desc = data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\")
+            
+            return {
+                \"city\": city,
+                \"temperature\": main_info.get(\"temp\", \"N/A\"),
+                \"humidity\": main_info.get(\"humidity\", \"N/A\"),
+                \"description\": weather_desc
+            }
+        else:
+            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}
+            
+    except requests.exceptions.RequestException as e:
+        return {\"error\": f\"Network or HTTP error occurred: {e}\"}
+    except Exception as e:
+        return {\"error\": f\"An unexpected error occurred: {e}\"}
+
+if __name__ == \"__main__\":
+    # Example usage
+    city_name = input(\"Enter city name to check the weather: \")
+    weather_data = get_weather(city_name)
+    
+    if \"error\" in weather_data:
+        print(f\"Error: {weather_data['error']}\")
+    else:
+        print(\"--- Weather Information ---\")
+        print(f\"City: {weather_data['city']}\")
+        print(f\"Temperature: {weather_data['temperature']}°C\")
+        print(f\"Humidity: {weather_data['humidity']}%")
+        print(f\"Description: {weather_data['description']}\")
+
+"
+}
