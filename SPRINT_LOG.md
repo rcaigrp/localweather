@@ -2046,3 +2046,14 @@ if __name__ == \"__main__\":
 ## Turn 5 — Manager (2026-05-24 10:16 UTC)
 
 
+
+## Turn 6 — Craft (2026-05-24 10:20 UTC)
+
+{
+  "files": [
+    {
+      "path": "app.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": \"YOUR_API_KEY\",  # !!! IMPORTANT: Replace with your actual API key\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather_desc = data.get(\"weather")[0].get(\"description\", \"No description found\")\n            temperature = main.get(\"temp\")\n            humidity = data.get(\"main\", {}).get(\"humidity\")\n            city_name = data.get(\"name\", city)\n            \n            return f\"Weather in {city_name}:\\n  Temperature: {temperature}°C\\n  Description: {weather_desc}\\n  Humidity: {humidity}%\"\n        else:\n            return f\"Error: City not found or API error. Code: {data.get(\"cod\")}\"\n    except requests.exceptions.RequestException as e:\n        return f\"Error fetching data: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\""
+    \nif __name__ == \"__main__\":\n    # Example usage\n    city = input(\"Enter city name: \")\n    if city:\n        result = get_weather(city)\n        print(result)\n    else:\n        print(\"Please enter a city name.\")"
+    }
+}
