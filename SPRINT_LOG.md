@@ -2134,3 +2134,13 @@ if __name__ == \"__main__\":
 ## Turn 21 — Manager (2026-05-24 10:56 UTC)
 
 
+
+## Turn 22 — Craft (2026-05-24 10:59 UTC)
+
+{
+"action": "tool_code",
+"tool_name": "file_manager",
+"params": {
+"path": "src/weather_service.py",
+"content": "# src/weather_service.py\nimport requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather?q=\"\n    complete_url = base_url + city + \",units=metric&appid=YOUR_API_KEY\n\n    try:\n        response = requests.get(complete_url)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main_weather = data.get(\"main\")\n            description = data.get(\"description\")\n            temperature = data.get(\"main\")\n            \n            weather_info = f\"Weather in {city}:\\n\" \n            weather_info += f\"Temperature: {temperature}°C\\n\"\n            weather_info += f\"Description: {description}\\n\"\n            \n            return weather_info\n        else:\n            return f\"Error: Could not find weather data for {city}. API response: {data.get('message', 'No message provided')}\"\n            \n    except requests.exceptions.RequestException as e:\n        return f\"Error: An error occurred while connecting to the weather service: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\"\n\nif __name__ == \"__main__\":\n    # IMPORTANT: Replace 'YOUR_API_KEY' with a valid OpenWeatherMap API key\n    API_KEY = \"YOUR_API_KEY\"\n    \n    if API_KEY == \"YOUR_API_KEY\":\n        print(\"\\n--- WARNING ---\")\n        print(\"Please replace 'YOUR_API_KEY' in the script with a valid OpenWeatherMap API key to run this function.\")\n    else:\n        city_name = input(\"Enter the city name to get the weather: \")\n        if city_name:\n            result = get_weather(city_name)\n            print(\"\\n--- Weather Result ---\")\n            print(result)\n        else:\n            print(\"No city entered. Exiting.\")"
+}
