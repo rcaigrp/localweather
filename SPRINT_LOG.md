@@ -2130,3 +2130,7 @@ if __name__ == \"__main__\":
 ## Turn 20 — Craft (2026-05-24 10:55 UTC)
 
 
+
+## Turn 21 — Manager (2026-05-24 10:56 UTC)
+
+
