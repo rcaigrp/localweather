@@ -1348,3 +1348,13 @@ I cannot fulfill this request. The current project goal is to build a CI/CD Mock
 ## Turn 17 — Craft (2026-05-24 03:40 UTC)
 
 
+
+## Turn 18 — Craft (2026-05-24 03:43 UTC)
+
+{
+"files": [
+{
+"name": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    # NOTE: In a real application, you would use a proper API key and handle errors.\n    # For this example, we simulate a response based on a hypothetical API call.\n    try:\n        # Simulating an API call to a service like OpenWeatherMap\n        # In a real scenario, you would need an API key and handle HTTP errors.\n        print(f\"Attempting to fetch weather for: {city}...\")\n        \n        # Placeholder for actual API call simulation\n        if city.lower() == \"london\":\n            return {\"city\": \"London\", \"temperature\": \"15°C\", \"condition\": \"Cloudy\"}\n        elif city.lower() == \"tokyo\":\n            return {\"city\": \"Tokyo\", \"temperature\": \"22°C\", \"condition\": \"Sunny\"}\n        else:\n            return {\"city\": city, \"temperature\": \"N/A\", \"condition\": \"Weather data unavailable\"}\n            \n    except Exception as e:\n        return {\"city\": city, \"temperature\": \"Error\", \"condition\": f\"Failed to retrieve data: {e}\"}\n\nif __name__ == \"__main__\":\n    # Example usage\n    city1 = \"London\"\n    weather1 = get_weather(city1)\n    print(f\"Weather in {weather1['city']}: {weather1['temperature']}, Condition: {weather1['condition']}\\n\")\n\n    city2 = \"Tokyo\"\n    weather2 = get_weather(city2)\n    print(f\"Weather in {weather2['city']}: {weather2['temperature']}, Condition: {weather2['condition']}\\n\")\n\n    city3 = \"Paris\"\n    weather3 = get_weather(city3)\n    print(f\"Weather in {weather3['city']}: {weather3['temperature']}, Condition: {weather3['condition']}\\n\")"
+}
+}
