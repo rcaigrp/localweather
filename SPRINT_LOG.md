@@ -1311,3 +1311,13 @@ I cannot fulfill this request. The current project goal is to build a CI/CD Mock
 ## Turn 11 — Craft (2026-05-24 03:23 UTC)
 
 
+
+## Turn 12 — Craft (2026-05-24 03:26 UTC)
+
+{
+"files": [
+{
+"path": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using the OpenWeatherMap API.\"\"\"\n    API_KEY = \"YOUR_API_KEY\"  # Replace with your actual API key\n    BASE_URL = \"http://api.openweathermap.org/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(BASE_URL, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            description = data.get(\"description\")\n            temp = main.get(\"temp\")\n            humidity = data.get(\"main\", {}).get(\"humidity\")\n            weather_desc = data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\")\n            \n            return {\n                \"city\": city,\n                \"temperature\": temp,\n                \"description\": weather_desc,\n                \"humidity\": humidity\n            }\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+}
+}
