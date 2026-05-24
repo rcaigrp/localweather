@@ -1382,3 +1382,14 @@ Based on the provided context, the task is to decide between two options: finish
 ## Turn 25 — Craft (2026-05-24 04:11 UTC)
 
 
+
+## Turn 26 — Craft (2026-05-24 04:14 UTC)
+
+{
+"files": [
+{
+"path": "src/weather.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    # NOTE: Replace this with a real API key and endpoint for actual use.\n    API_KEY = \"YOUR_API_KEY\"\n    BASE_URL = \"http://api.openweathermap.org/data/2.5/weather\"\n\n    if API_KEY == \"YOUR_API_KEY\":\n        return {\"error\": \"API Key not configured. Please set a valid API key.\"}\n\n    params = {\n        \"q\": city,\n        \"appid\": API_KEY,\n        \"units\": \"metric\"\n    }\n\n    try:\n        response = requests.get(BASE_URL, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            weather_info = {\n                \"city\": data.get(\"name\", city),\n                \"temperature\": data.get(\"main\", \"N/A\"),\n                \"description\": data.get(\"description\", \"N/A\"),\n                \"humidity\": data.get(\"humidity\", \"N/A\")\n            }\n            return weather_info\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"}\n\    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n\n\nif __name__ == \"__main__\":\n    # Example usage (will fail without a real API key)\n    print(\"--- Testing Weather Function ---\")\n    city_name = input(\"Enter city to check weather for: \")\n    if city_name:\n        result = get_weather(city_name)\n        print(f\"Weather for {result.get('city', 'N/A')}:\")\n        if 'error' in result:\n            print(f\"Error: {result['error']}\")\n        else:\n            print(f\"Temperature: {result.get('temperature')}°C\")\n            print(f\"Description: {result.get('description')}\")\n            print(f\"Humidity: {result.get('humidity')}%\")\n    else:\n        print(\"No city entered.\")"
+}
+]
+}
