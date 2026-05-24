@@ -2071,3 +2071,7 @@ if __name__ == \"__main__\":
 "content": "def get_weather(city: str) -> dict:\n    \"\"\"Fetches the current weather for a given city.\"\"\"\n    # In a real application, this would interact with an external weather API\n    if city.lower() == \"london\":\n        return {\n            \"city\": \"London\",\n            \"temperature\": \"15C\",\n            \"condition\": \"Cloudy\",\n            \"humidity\": \"70%\"\n        }\n    elif city.lower() == \"tokyo\":\n        return {\n            \"city\": \"Tokyo\",\n            \"temperature\": \"22C\",\n            \"condition\": \"Sunny\",\n            \"humidity\": \"60%\"\n        }\n    else:\n        return {\n            \"city\": city.capitalize(),\n            \"temperature\": \"N/A\",\n            \"condition\": \"Weather data unavailable\"\n        }\n\n\nif __name__ == \"__main__\":\n    # Example usage\n    city1 = \"London\"\n    weather1 = get_weather(city1)\n    print(f\"Weather in {city1}: {weather1}\")\n\n    city2 = \"Tokyo\"\n    weather2 = get_weather(city2)\n    print(f\"Weather in {city2}: {weather2}\")\n\n    city3 = \"New York\"\n    weather3 = get_weather(city3)\n    print(f\"Weather in {city3}: {weather3}\")"
 }
 ]
+
+## Turn 9 — Manager (2026-05-24 10:27 UTC)
+
+
