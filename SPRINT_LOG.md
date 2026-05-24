@@ -1560,3 +1560,15 @@ I understand the instruction. The goal is to implement the 'weather module' as t
 ## Turn 24 — Craft (2026-05-24 06:25 UTC)
 
 
+
+## Turn 25 — Craft (2026-05-24 06:28 UTC)
+
+{
+  "files": [
+    {
+      "path": "app.py",
+      "content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": \"YOUR_API_KEY\",  # Replace with your actual API key\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main_weather = data.get(\"main\")\n            description = data.get(\"description\")\n            temperature = data.get(\"main\")\n            return f\"Weather in {city}: Temperature is {temperature}°C, Conditions: {description.capitalize()}\"\n        else:\n            return f\"Error: Could not find weather data for {city}. Response: {data.get('message', 'Unknown error')}\"\n    except requests.exceptions.RequestException as e:\n        return f\"Error: An error occurred while connecting to the weather service: {e}\"\n    except Exception as e:\n        return f\"An unexpected error occurred: {e}\""
+    \nif __name__ == \"__main__\":\n    # IMPORTANT: Replace \"YOUR_API_KEY\" with a valid OpenWeatherMap API key\n    city_name = input(\"Enter the city name you want to check the weather for: \")\n    if city_name:\n        weather_info = get_weather(city_name)\n        print(weather_info)\n    else:\n        print(\"Please enter a city name.\")"
+    }
+  ]
+}
