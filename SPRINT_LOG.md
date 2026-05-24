@@ -1576,3 +1576,12 @@ I understand the instruction. The goal is to implement the 'weather module' as t
 ## Turn 26 — Craft (2026-05-24 06:31 UTC)
 
 
+
+## Turn 27 — Craft (2026-05-24 06:34 UTC)
+
+{
+"actions": [
+{
+"type": "code",
+"code": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    try:\n        params = {\n            \"q\": city,\n            \"appid\": \"YOUR_API_KEY\",  # Replace with your actual API key\n            \"units\": \"metric\"\n        }\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        \n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather = data.get(\"weather\")\n            name = data.get(\"name\")\n            \n            if main and weather and name:\n                temperature = main.get(\"temp\")\n                description = weather[0].get(\"description\")\n                \n                return {\n                    \"city\": name,\n                    \"temperature\": temperature,\n                    \"description\": description\n                }\n            else:\n                return {\"error\": \"Incomplete data received\"}\n        else:\n            return {\"error\": f\"City not found or API error: {data.get(\"message\", \"Unknown error\")}\"\n\n    except requests.exceptions.RequestException as e:\n        return {\"error\": f\"Network or HTTP error occurred: {e}\"}\n    except Exception as e:\n        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+}
