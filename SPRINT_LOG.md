@@ -1076,3 +1076,13 @@ I cannot fulfill this request. The current project goal is to build a CI/CD Mock
 ## Turn 5 — Craft (2026-05-24 01:16 UTC)
 
 
+
+## Turn 6 — Craft (2026-05-24 01:19 UTC)
+
+{
+"files": [
+{
+"name": "app.py",
+"content": "import requests\n\ndef get_weather(city):\n    \"\"\"Fetches the weather data for a given city.\"\"\"\n    base_url = \"http://api.openweathermap.org/data/2.5/weather\"\n    params = {\n        \"q\": city,\n        \"appid\": \"YOUR_API_KEY\",\n        \"units\": \"metric\"\n    }\n    try:\n        response = requests.get(base_url, params=params)\n        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)\n        data = response.json()\n        if data.get(\"cod\") == 200:\n            main = data.get(\"main\")\n            weather = data.get(\"weather\")\n            city_name = data.get(\"name\")\n            description = weather[0].get(\"description\")\n            temperature = main.get(\"temp\")\n            humidity = main.get(\"humidity\")\n            print(f\"Weather in {city_name}:\\n  Temperature: {temperature}°C\\n  Description: {description}\\n  Humidity: {humidity}%\")\n        else:\n            print(f\"Error: Could not find weather data for {city}. Response: {data.get('message', 'No message provided')}\")\n    except requests.exceptions.RequestException as e:\n        print(f\"An error occurred while fetching weather data: {e}\")\n    except Exception as e:\n        print(f\"An unexpected error occurred: {e}\")\n\nif __name__ == \"__main__\":\n    city = input(\"Enter city name: \")\n    if city:\n        get_weather(city)\n    else:\n        print(\"Please enter a city name.\")"
+}
+}
