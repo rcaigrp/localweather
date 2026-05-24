@@ -1743,3 +1743,48 @@ I understand the instruction. The goal is to implement the 'weather module' as t
 ## Turn 19 — Craft (2026-05-24 08:38 UTC)
 
 
+
+## Turn 20 — Craft (2026-05-24 08:41 UTC)
+
+{
+"content": "
+import requests
+
+def get_weather(city):
+    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"
+    base_url = \"https://api.openweathermap.org/data/2.5/weather?q=\" + city + \
+               \"&units=metric&appid=YOUR_API_KEY\"
+    try:
+        response = requests.get(base_url)
+        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+        data = response.json()
+        
+        if data and 'main' in data and 'temp' in data and 'description' in data:
+            temperature = data['main']['temp']
+            description = data['weather'][0]['description']
+            return temperature, description
+        else:
+            return None, \"Error: Could not parse weather data.\"
+    except requests.exceptions.RequestException as e:
+        return None, f\"Error fetching data: {e}\"
+
+def format_weather(temp, description):
+    \"\"\"Formats the temperature and description into a readable string.\"\"\"
+    if temp is not None:
+        return f\"Temperature: {temp}°C, Description: {description.capitalize()}\"
+    return \"Weather data unavailable.\"
+
+if __name__ == \"__main__\":
+    # IMPORTANT: Replace 'YOUR_API_KEY' with a valid OpenWeatherMap API key
+    API_KEY = \"YOUR_API_KEY\" 
+    city_name = input(\"Enter the city name to get the weather: \")
+    
+    if API_KEY == \"YOUR_API_KEY\":
+        print(\"\\nERROR: Please replace 'YOUR_API_KEY' in the script with a valid OpenWeatherMap API key to run this function.\")
+    else:
+        temperature, description = get_weather(city_name)
+        formatted_result = format_weather(temperature, description)
+        print(formatted_result)
+
+"
+}
