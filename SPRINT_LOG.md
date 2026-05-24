@@ -1796,3 +1796,45 @@ if __name__ == \"__main__\":
 ## Turn 23 — Craft (2026-05-24 08:58 UTC)
 
 
+
+## Turn 24 — Craft (2026-05-24 09:01 UTC)
+
+{
+  "files": [
+    {
+      "path": "src/calculator.py",
+      "content": "# This is a placeholder for a calculator module, not directly related to the weather API."
+    },
+    {
+      "path": "src/weather_service.py",
+      "content": "import requests
+
+def get_weather(city, api_key):
+    \"\"\"Fetches the current weather for a given city using a public API.\"\"\"
+    base_url = \"https://api.openweathermap.org/data/2.5/weather?q=\"
+    params = {\"q\": city, \"appid\": api_key, \"units\": \"metric\"}
+    
+    try:
+        response = requests.get(base_url + city, params=params)
+        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+        data = response.json()
+        
+        if data.get(\"cod\") == 200:
+            main = data.get(\"main\", {\"temp\": \"N/A\", \"humidity\": \"N/A\"})
+            description = data.get(\"weather\", [{}])[0].get(\"description\", \"N/A\")
+            
+            return {
+                \"city\": data.get(\"name\", \"Unknown City\"),
+                \"temperature\": main.get(\"temp\", \"N/A\"),
+                \"description\": description,
+                \"humidity\": main.get(\"humidity\", \"N/A\")
+            }
+        else:
+            return {\"error\": data.get(\"message\", \"City not found or API error\")}"
+            
+    except requests.exceptions.RequestException as e:
+        return {\"error\": f\"Network or HTTP error: {e}\"}"
+    except Exception as e:
+        return {\"error\": f\"An unexpected error occurred: {e}\"}"
+"
+}
